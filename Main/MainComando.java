@@ -1,13 +1,18 @@
-package Main;
+package main;
 
-import Janela.JanelaComando;
-import Objetos.Forma;
+import java.awt.Color;
+
+import janela.JanelaComando;
+import objetos.Bola;
+import objetos.Forma;
+import paineis.Canvas;
 
 public class MainComando {
 
 	public static void main(String[] args) {
-		Forma forma = new Forma(200, 100);
-		new JanelaComando(forma);
+		Forma forma = new Bola(0, 0, Color.green);
+		Canvas canvas = new Canvas(forma);
+		new JanelaComando(canvas);
 	}
 
 }

@@ -1,4 +1,4 @@
-package Janela;
+package janela;
 
 import javax.swing.JFrame;
 

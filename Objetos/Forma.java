@@ -1,35 +1,45 @@
-package Objetos;
+package objetos;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.LayoutManager;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.JPanel;
+public class Forma {
 
-public class Forma extends JPanel {
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
+	protected int w;
+	protected int h;
+	
+	public Forma() {
+		x = 0;
+		y = 0;
+		w = 10;
+		h = 10;
+	}
 	
 	public Forma(int x, int y) {
 		this.x = x;
 		this.y = y;
+		w = 10;
+		h = 10;
 	}
 	
-	public void atualizar() {
-		x += 1;
-		y += 1;
-	}
-	
-	public void setLocal(int dx, int dy) {
-		x += dx;
-		y += dy;
-	}
-	
-	@Override
-	public void paint(Graphics g) {
-		//g.clearRect(0, 0, getWidth(), getHeight());
-		g.fillRect(x, y, 10, 10);
+	public Forma(int x, int y, int w, int h) {
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
 	}
 
+	public void incX(int dx) {x += dx;}
+
+	public void incY(int dy) {y += dy;}
+	
+	public void pintar(Graphics g) {g.fillRect(x, y, w, h);}
+	
+	public void pintar(Graphics g, Color c) {
+		g.setColor(c);
+		g.fillRect(x, y, w, h);		
+	}
+	
 }

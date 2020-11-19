@@ -1,17 +1,16 @@
-package Janela;
+package janela;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-import Objetos.Forma;
+import paineis.Canvas;
 
 public class JanelaComando extends JFrame {
-	private Forma forma;
 	
-	public JanelaComando(Forma f) {
-		forma = f;
+	public JanelaComando(Canvas f) {
+		Canvas canvas = f;
 		add(f);
 		addKeyListener(new KeyListener() {
 			
@@ -33,20 +32,20 @@ public class JanelaComando extends JFrame {
 				
 				switch (key) {
 				case 38: // cima
-					forma.setLocal(0, -1);
-					forma.repaint();
+					canvas.atualizar(0, -1);
+					canvas.repaint();
 					break;
 				case 40: // baixo
-					forma.setLocal(0, 1);
-					forma.repaint();
+					canvas.atualizar(0, 1);
+					canvas.repaint();
 					break;
 				case 37: // esquerda
-					forma.setLocal(-1, 0);
-					forma.repaint();
+					canvas.atualizar(-1, 0);
+					canvas.repaint();
 					break;
 				case 39: // direita
-					forma.setLocal(1, 0);
-					forma.repaint();
+					canvas.atualizar(1, 0);
+					canvas.repaint();
 					break;
 				}
 			}
