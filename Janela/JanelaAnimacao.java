@@ -6,8 +6,7 @@ import paineis.Canvas;
 import tarefas.Animacao;
 
 public class JanelaAnimacao extends JFrame {
-	
-	
+		
 	public JanelaAnimacao(Animacao a) {
 		Canvas canvas = a.getCanvas();
 		add(canvas);

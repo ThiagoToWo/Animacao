@@ -9,6 +9,8 @@ public class Forma {
 	protected int y;
 	protected int w;
 	protected int h;
+	protected int dx;
+	protected int dy;
 	
 	public Forma() {
 		x = 0;
@@ -31,11 +33,28 @@ public class Forma {
 		this.h = h;
 	}
 
-	public void incX(int dx) {x += dx;}
+	public int getDx() {
+		return dx;
+	}
 
-	public void incY(int dy) {y += dy;}
+	public int getDy() {
+		return dy;
+	}
+
+	public void setInc(int dx, int dy) {
+		this.dx = dx;
+		this.dy = dy;
+	}
 	
-	public void pintar(Graphics g) {g.fillRect(x, y, w, h);}
+	// os métodos abaixo são chamados de forma automática em canvas quando estão em animação
+	public void inc() {
+		x += dx;
+		y += dy;
+	}
+	
+	public void pintar(Graphics g) { 
+		g.fillRect(x, y, w, h);
+	}
 	
 	public void pintar(Graphics g, Color c) {
 		g.setColor(c);

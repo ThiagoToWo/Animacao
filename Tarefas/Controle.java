@@ -47,19 +47,19 @@ public class Controle implements KeyListener {
 		
 		switch (key) {
 		case 38: // cima
-			canvas.atualizar(0, -dy);
+			canvas.atualizarContolavel(0, -dy);
 			canvas.repaint();
 			break;
 		case 40: // baixo
-			canvas.atualizar(0, dy);
+			canvas.atualizarContolavel(0, dy);
 			canvas.repaint();
 			break;
 		case 37: // esquerda
-			canvas.atualizar(-dx, 0);
+			canvas.atualizarContolavel(-dx, 0);
 			canvas.repaint();
 			break;
 		case 39: // direita
-			canvas.atualizar(dx, 0);
+			canvas.atualizarContolavel(dx, 0);
 			canvas.repaint();
 			break;
 		}
