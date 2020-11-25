@@ -10,7 +10,7 @@ public class JanelaAnimacao extends JFrame {
 	public JanelaAnimacao(Animacao a) {
 		Canvas canvas = a.getCanvas();
 		add(canvas);
-		a.start();
+		a.start();		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(500, 100);

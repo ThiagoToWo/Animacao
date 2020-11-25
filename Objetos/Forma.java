@@ -3,14 +3,17 @@ package objetos;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Forma {
+import javax.swing.JComponent;
 
-	protected int x;
-	protected int y;
-	protected int w;
-	protected int h;
-	protected int dx;
-	protected int dy;
+public class Forma implements Modelo {
+
+	private int x;
+	private int y;
+	private int w;
+	private int h;
+	private int dx;
+	private int dy;
+	private Color c;
 	
 	public Forma() {
 		x = 0;
@@ -33,6 +36,22 @@ public class Forma {
 		this.h = h;
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+	
+	public int getWidth() {
+		return w;
+	}
+
+	public int getHeight() {
+		return h;
+	}
+
 	public int getDx() {
 		return dx;
 	}
@@ -41,9 +60,41 @@ public class Forma {
 		return dy;
 	}
 
+	public Color getColor() {
+		return c;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setWidth(int w) {
+		this.w = w;
+	}
+
+	public void setHeight(int h) {
+		this.h = h;
+	}
+
+	public void setDx(int dx) {
+		this.dx = dx;
+	}
+
+	public void setDy(int dy) {
+		this.dy = dy;
+	}
+
 	public void setInc(int dx, int dy) {
 		this.dx = dx;
 		this.dy = dy;
+	}
+	
+	public void setColor(Color c) {
+		this.c = c;
 	}
 	
 	// os métodos abaixo são chamados de forma automática em canvas quando estão em animação
@@ -53,12 +104,8 @@ public class Forma {
 	}
 	
 	public void pintar(Graphics g) { 
+		g.setColor(c);
 		g.fillRect(x, y, w, h);
 	}
-	
-	public void pintar(Graphics g, Color c) {
-		g.setColor(c);
-		g.fillRect(x, y, w, h);		
-	}
-	
+
 }

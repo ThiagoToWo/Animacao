@@ -5,14 +5,14 @@ import java.awt.Color;
 import janela.JanelaComando;
 import objetos.Bola;
 import objetos.Forma;
-import paineis.Canvas;
+import paineis.CanvasFechado;
 import tarefas.Controle;
 
 public class MainComando {
 
 	public static void main(String[] args) {
 		// cria as formas
-		Forma f1 = new Bola(0, 0, Color.black);
+		Forma f1 = new Bola(1, 1, Color.black);
 		Forma f2 = new Forma(20, 30);
 		
 		// configura o incremento das formas (desnecessário)
@@ -20,7 +20,7 @@ public class MainComando {
 		f2.setInc(2, 1);
 		
 		//cria o canvas
-		Canvas canvas = new Canvas();
+		CanvasFechado canvas = new CanvasFechado();
 		
 		// adiciona as formas no canvas
 		canvas.addForma(f1);
