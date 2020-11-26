@@ -33,8 +33,8 @@ public class CanvasFechado extends Canvas {
 	}*/
 	
 	@Override
-	public void atualizar(int i) {
-		Forma forma = getForma(i);
+	public void atualizarAnimado(int i) {
+		Forma forma = getFormaAnimada(i);
 		if (col.colidiuPorDentroDirOuEsq(forma, this)) {
 			forma.setDx(-1 * forma.getDx());
 		}
@@ -43,7 +43,7 @@ public class CanvasFechado extends Canvas {
 			forma.setDy(-1 * forma.getDy());
 		}
 		
-		forma.inc();
+		forma.incAnimacao();
 	}
 
 }

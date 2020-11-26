@@ -9,48 +9,71 @@ import objetos.Forma;
 
 public class Canvas extends JPanel {
 	
-	private ArrayList<Forma> formaList;
+	private ArrayList<Forma> formaAnimadaList;
+	private ArrayList<Forma> formaControladaList;
 	
 	public Canvas() {
-		formaList = new ArrayList<>();		
+		formaAnimadaList = new ArrayList<>();
+		formaControladaList = new ArrayList<>();
+	}
+		
+	public Canvas(Forma fc) {
+		formaAnimadaList = new ArrayList<>();
+		formaControladaList = new ArrayList<>();
+		formaControladaList.add(fc);
 	}
 	
-	public Canvas(Forma f) {
-		formaList = new ArrayList<>();
-		formaList.add(f);
+	public Canvas(Forma fa, Forma fc) {
+		formaAnimadaList = new ArrayList<>();
+		formaControladaList = new ArrayList<>();
+		formaAnimadaList.add(fa);
+		formaControladaList.add(fc);
 	}
 	
-	public Forma getForma(int i) {
-		return formaList.get(i);
+	public Forma getFormaAnimada(int i) {
+		return formaAnimadaList.get(i);
 	}
 	
-	public void addForma(Forma f) {
-		formaList.add(f);
+	private Forma getFormaControlada(int i) {
+		return formaControladaList.get(i);
 	}
 	
-	public int quantidadeDeFormas() {
-		return formaList.size();
+	public void addFormaAnimada(Forma fa) {
+		formaAnimadaList.add(fa);
+	}
+	
+	public int qtdeDeFormasAnimadas() {
+		return formaAnimadaList.size();
+	}
+	
+	public void addFormaControlada(Forma fc) {
+		formaControladaList.add(fc);
+	}
+	
+	public int qtdeDeFormasControladas() {
+		return formaControladaList.size();
+	}
+	
+	public void atualizarContolado(int i, int key) {
+		Forma forma = getFormaControlada(i);
+		forma.incControle(key);
 	}	
-	
-	public void atualizarContolavel(int dx, int dy) {
-		Forma forma = formaList.get(0);
-		if (forma.getDx() != dx || forma.getDy() != dy ) {
-			forma.setInc(dx, dy);
-		}
-		forma.inc();
-	}
-	
-	public void atualizar(int i) {
-		Forma forma = formaList.get(i);
-		forma.inc();
+
+	public void atualizarAnimado(int i) {
+		Forma forma = getFormaAnimada(i);
+		forma.incAnimacao();
 	}
 		
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);		
-		for (Forma forma : formaList) {
+		for (Forma forma : formaAnimadaList) {
 			forma.pintar(g);
 		}
-	}
+		
+		for (Forma forma : formaControladaList) {
+			forma.pintar(g);
+		}
+	}	
 	
 }

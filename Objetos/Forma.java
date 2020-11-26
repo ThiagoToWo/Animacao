@@ -3,8 +3,6 @@ package objetos;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JComponent;
-
 public class Forma implements Modelo {
 
 	private int x;
@@ -12,28 +10,31 @@ public class Forma implements Modelo {
 	private int w;
 	private int h;
 	private int dx;
-	private int dy;
+	private int dy;	
+	private int ctrlL;
+	private int ctrlU;
+	private int ctrlR;
+	private int ctrlD;
 	private Color c;
 	
 	public Forma() {
-		x = 0;
-		y = 0;
-		w = 10;
-		h = 10;
+		this(0, 0, 10, 10);
 	}
 	
 	public Forma(int x, int y) {
-		this.x = x;
-		this.y = y;
-		w = 10;
-		h = 10;
+		this(x, y, 10, 10);
 	}
 	
 	public Forma(int x, int y, int w, int h) {
+		this(x, y, w, h, Color.black);
+	}
+	
+	public Forma(int x, int y, int w, int h, Color c) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
+		this.c = c;
 	}
 
 	public int getX() {
@@ -93,12 +94,54 @@ public class Forma implements Modelo {
 		this.dy = dy;
 	}
 	
+	public void setCtrlL(int ctrlL) {
+		this.ctrlL = ctrlL;
+	}
+
+	public void setCtrlU(int ctrlU) {
+		this.ctrlU = ctrlU;
+	}
+
+	public void setCtrlR(int ctrlR) {
+		this.ctrlR = ctrlR;
+	}
+
+	public void setCtrlD(int ctrlD) {
+		this.ctrlD = ctrlD;
+	}
+
+	public void setControles(int esquerda, int cima, int direita, int baixo) {
+		ctrlL = esquerda;
+		ctrlU = cima;
+		ctrlR = direita;
+		ctrlD = baixo;
+	}
+	
 	public void setColor(Color c) {
 		this.c = c;
 	}
 	
+	public void incControle(int key) {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (key == ctrlU) { // cima
+					y -= dy;
+				} else if (key == ctrlD) { // baixo
+					y += dy;
+				} else if (key == ctrlL) { // esquerda
+					x -= dx;
+				} else if (key == ctrlR) { // direita
+					x += dx;			
+				}
+			}
+		});
+		
+	}
+	
 	// os métodos abaixo são chamados de forma automática em canvas quando estão em animação
-	public void inc() {
+	public void incAnimacao() {
 		x += dx;
 		y += dy;
 	}

@@ -19,8 +19,8 @@ public class CanvasFechadoComColisao extends CanvasFechado {
 	}
 
 	@Override
-	public void atualizar(int i) {
-		FormaQueColide forma = (FormaQueColide) getForma(i);
+	public void atualizarAnimado(int i) {
+		FormaQueColide forma = (FormaQueColide) getFormaAnimada(i);
 		
 		
 		if (col.colidiuPorDentroDirOuEsq(forma, this)) {
@@ -31,10 +31,10 @@ public class CanvasFechadoComColisao extends CanvasFechado {
 			forma.setDy(-1 * forma.getDy());
 		}
 		
-		for (int j = 0; j < super.quantidadeDeFormas(); j++) {
+		for (int j = 0; j < super.qtdeDeFormasAnimadas(); j++) {
 			if (j == i) continue; // garante que não colidirá uma forma com ela mesma
 			
-			FormaQueColide alvo = (FormaQueColide) getForma(j);
+			FormaQueColide alvo = (FormaQueColide) getFormaAnimada(j);
 			if (forma.colidiuCom(alvo)) { // trocam velocidades
 				int xTemp = forma.getDx();
 				int yTemp = forma.getDy();
@@ -43,6 +43,6 @@ public class CanvasFechadoComColisao extends CanvasFechado {
 			}
 		}
 
-		forma.inc();
+		forma.incAnimacao();
 	}	
 }

@@ -7,31 +7,12 @@ import paineis.Canvas;
 
 public class Controle implements KeyListener {
 
-	private int dx;
-	private int dy;
 	private Canvas canvas;
 	
 	public Controle(Canvas c) {
 		canvas = c;
-		this.dx = 1;
-		this.dy = 1;
 	}
 	
-	public Controle(Canvas c, int dx, int dy) {
-		canvas = c;
-		this.dx = dx;
-		this.dy = dy;
-	}
-	
-	public void setDx(int dx) {
-		this.dx = dx;
-	}
-
-
-	public void setDy(int dy) {
-		this.dy = dy;
-	}
-
 	public Canvas getCanvas() {
 		return canvas;
 	}
@@ -45,24 +26,11 @@ public class Controle implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
-		switch (key) {
-		case 38: // cima
-			canvas.atualizarContolavel(0, -dy);
+		for (int i = 0; i < canvas.qtdeDeFormasControladas(); i++) {
+			canvas.atualizarContolado(i, key);
 			canvas.repaint();
-			break;
-		case 40: // baixo
-			canvas.atualizarContolavel(0, dy);
-			canvas.repaint();
-			break;
-		case 37: // esquerda
-			canvas.atualizarContolavel(-dx, 0);
-			canvas.repaint();
-			break;
-		case 39: // direita
-			canvas.atualizarContolavel(dx, 0);
-			canvas.repaint();
-			break;
 		}
+		
 	}
 
 	@Override

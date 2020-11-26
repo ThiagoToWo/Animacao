@@ -8,8 +8,7 @@ public class Animacao extends Thread {
 	private Canvas canvas;
 	
 	public Animacao(Canvas c) {
-		canvas = c;
-		this.dt = 17;
+		this(c, 17);
 	}
 	
 	public Animacao(Canvas c, int dt) {
@@ -28,8 +27,8 @@ public class Animacao extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			for (int i = 0; i < canvas.quantidadeDeFormas(); i++) {
-				canvas.atualizar(i);
+			for (int i = 0; i < canvas.qtdeDeFormasAnimadas(); i++) {
+				canvas.atualizarAnimado(i);
 			}
 			canvas.repaint();
 			try {
