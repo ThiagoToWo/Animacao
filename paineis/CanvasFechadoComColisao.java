@@ -6,6 +6,7 @@ import tarefas.Colisao;
 
 public class CanvasFechadoComColisao extends CanvasFechado {
 
+	private static final long serialVersionUID = -5476902390509805538L;
 	Colisao col;
 	
 	public CanvasFechadoComColisao() {
@@ -22,12 +23,11 @@ public class CanvasFechadoComColisao extends CanvasFechado {
 	public void atualizarAnimado(int i) {
 		FormaQueColide forma = (FormaQueColide) getFormaAnimada(i);
 		
-		
-		if (col.colidiuPorDentroDirOuEsq(forma, this)) {
+		if (col.colidiuPorDentroDireita(forma, this) || col.colidiuPorDentroEsquerda(forma, this)) {
 			forma.setDx(-1 * forma.getDx());
-		}
+		}		
 		
-		if (col.colidiuPorDentroCimaOuBaixo(forma, this)) { 
+		if (col.colidiuPorDentroAcima(forma, this) || col.colidiuPorDentroAbaixo(forma, this)) { 
 			forma.setDy(-1 * forma.getDy());
 		}
 		

@@ -7,6 +7,8 @@ import tarefas.Controle;
 
 public class JanelaComando extends JFrame {
 	
+	private static final long serialVersionUID = -4399294485834430861L;
+
 	public JanelaComando(Controle c) {
 		Canvas canvas = c.getCanvas();
 		add(canvas);

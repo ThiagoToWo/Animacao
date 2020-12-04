@@ -122,22 +122,15 @@ public class Forma implements Modelo {
 	}
 	
 	public void incControle(int key) {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (key == ctrlU) { // cima
-					y -= dy;
-				} else if (key == ctrlD) { // baixo
-					y += dy;
-				} else if (key == ctrlL) { // esquerda
-					x -= dx;
-				} else if (key == ctrlR) { // direita
-					x += dx;			
-				}
-			}
-		});
-		
+		if (key == ctrlU) { // cima
+			y -= dy;
+		} else if (key == ctrlD) { // baixo
+			y += dy;
+		} else if (key == ctrlL) { // esquerda
+			x -= dx;
+		} else if (key == ctrlR) { // direita
+			x += dx;			
+		}
 	}
 	
 	// os métodos abaixo são chamados de forma automática em canvas quando estão em animação

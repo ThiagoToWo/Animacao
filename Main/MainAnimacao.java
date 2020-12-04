@@ -1,57 +1,91 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import janela.JanelaAnimacao;
-import objetos.FormaQueColide;
-import paineis.CanvasFechadoComColisao;
+import objetos.Forma;
+import paineis.Canvas;
 import tarefas.Animacao;
+import tarefas.Colisao;
 
 public class MainAnimacao {
-	
+		
 	public static void main(String[] args) {
-		// cria as formas
-		FormaQueColide f1 = new FormaQueColide(50, 50, 20, 20, Color.green);
-		FormaQueColide f2 = new FormaQueColide(200, 30, 20, 20, Color.red);
-		FormaQueColide f3 = new FormaQueColide(100, 49, 20, 20, Color.blue);
-		FormaQueColide f4 = new FormaQueColide(10, 100, 20, 20, Color.yellow);
-		FormaQueColide f5 = new FormaQueColide(104, 210, 20, 20, Color.gray);
-		FormaQueColide f6 = new FormaQueColide(110, 110, 20, 20, Color.black);
-		FormaQueColide f7 = new FormaQueColide(210, 210, 20, 20, Color.cyan);
-		FormaQueColide f8 = new FormaQueColide(150, 310, 20, 20, Color.magenta);
-		FormaQueColide f9 = new FormaQueColide(10, 310, 20, 20, Color.orange);
-		FormaQueColide f10 = new FormaQueColide(210, 130, 20, 20, Color.pink);
+		// cria as formas	
+		BolaQueColide bolaVermelhaQueColide = new BolaQueColide(10, 200, 20, 20, Color.red);
+		BolaQueColide bolaAzulQueColide = new BolaQueColide(200, 10, 20, 20, Color.blue);
+		
 		
 		// configura os movimentos iniciais
-		f1.setInc(2, 1);
-		f2.setInc(1, 2);
-		f3.setInc(3, 1);
-		f4.setInc(-1, 1);
-		f5.setInc(9, 3);
-		f6.setInc(-1, -2);
-		f7.setInc(-3, 0);
-		f8.setInc(0, -6);
-		f9.setInc(-1, -6);
-		f10.setInc(1, 6);
+		bolaVermelhaQueColide.setInc(2, 1);
+		bolaAzulQueColide.setInc(1, 2);		
 		
 		// cria um canvas
-		CanvasFechadoComColisao canvas = new CanvasFechadoComColisao();
+		CanvasFechadoComColisao canvasFechadoComColisao = new CanvasFechadoComColisao();
 		
 		// adiciona s formas no canvas
-		canvas.addFormaAnimada(f1);
-		canvas.addFormaAnimada(f3);
-		canvas.addFormaAnimada(f2);
-		canvas.addFormaAnimada(f4);
-		canvas.addFormaAnimada(f5);
-		canvas.addFormaAnimada(f6);
-		canvas.addFormaAnimada(f7);
-		canvas.addFormaAnimada(f8);
-		canvas.addFormaAnimada(f9);
-		canvas.addFormaAnimada(f10);
+		canvasFechadoComColisao.addFormaAnimada(bolaVermelhaQueColide);
+		canvasFechadoComColisao.addFormaAnimada(bolaAzulQueColide);
 		
 		// cria uma animação
-		Animacao a = new Animacao(canvas);
+		Animacao a = new Animacao(canvasFechadoComColisao);
 		
+		// cria uma janela de animação e adiciona a animação
 		new JanelaAnimacao(a);
+	}	
+}
+
+class BolaQueColide extends Forma {
+	
+	int x, y, w, h;
+	Color c;
+	
+	public BolaQueColide(int x, int y, int w, int h, Color c) {
+		super(x, y, w, h, c);
 	}
+	
+	Colisao col = new Colisao();
+	
+	public boolean colidiuCom(Forma f) {
+		return col.colidiuPorFora(this, f);
+	}
+	
+	@Override
+	public void pintar(Graphics g) {
+		g.setColor(super.getColor());
+		g.fillOval(super.getX(), super.getY(), super.getWidth(), super.getHeight());
+	}
+}
+
+class CanvasFechadoComColisao extends Canvas {
+	
+	Colisao col = new Colisao();
+	
+	@Override
+	public void atualizarAnimado(int i) {
+		BolaQueColide forma = (BolaQueColide) getFormaAnimada(i);
+		
+		if (col.colidiuPorDentroDireita(forma, this) || col.colidiuPorDentroEsquerda(forma, this)) {
+			forma.setDx(-1 * forma.getDx());
+		}		
+		
+		if (col.colidiuPorDentroAcima(forma, this) || col.colidiuPorDentroAbaixo(forma, this)) { 
+			forma.setDy(-1 * forma.getDy());
+		}
+		
+		for (int j = 0; j < super.qtdeDeFormasAnimadas(); j++) {
+			if (j == i) continue; // garante que não colidirá uma forma com ela mesma
+			
+			Forma alvo = getFormaAnimada(j);
+			if (forma.colidiuCom(alvo)) { // trocam velocidades
+				int xTemp = forma.getDx();
+				int yTemp = forma.getDy();
+				forma.setInc(alvo.getDx(), alvo.getDy());
+				alvo.setInc(xTemp, yTemp);
+			}
+		}
+
+		forma.incAnimacao();
+	}	
 }

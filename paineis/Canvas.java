@@ -9,6 +9,7 @@ import objetos.Forma;
 
 public class Canvas extends JPanel {
 	
+	private static final long serialVersionUID = 6259775046055696149L;
 	private ArrayList<Forma> formaAnimadaList;
 	private ArrayList<Forma> formaControladaList;
 	

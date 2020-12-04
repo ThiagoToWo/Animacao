@@ -6,7 +6,9 @@ import paineis.Canvas;
 import tarefas.Animacao;
 
 public class JanelaAnimacao extends JFrame {
-		
+	
+	private static final long serialVersionUID = -5127892650379647651L;
+
 	public JanelaAnimacao(Animacao a) {
 		Canvas canvas = a.getCanvas();
 		add(canvas);

@@ -6,20 +6,36 @@ import objetos.Modelo;
 
 public class Colisao {
 
-	public boolean colidiuPorDentroDirOuEsq(Modelo c1, JComponent c2) {
-		return (c1.getX() <= c2.getX() || c1.getX() + c1.getWidth() >= c2.getWidth());
+	public boolean colidiuPorDentroDireita(Modelo c1, JComponent c2) {
+		return (c1.getX() + c1.getWidth() >= c2.getWidth());
 	}
 	
-	public boolean colidiuPorDentroCimaOuBaixo(Modelo c1, JComponent c2) {
-		return (c1.getY() <= c2.getY() || c1.getY() + c1.getHeight() >= c2.getHeight());
+	public boolean colidiuPorDentroEsquerda(Modelo c1, JComponent c2) {
+		return (c1.getX() <= c2.getX());
+	}
+	
+	public boolean colidiuPorDentroAcima(Modelo c1, JComponent c2) {
+		return (c1.getY() <= c2.getY());
+	}
+	
+	public boolean colidiuPorDentroAbaixo(Modelo c1, JComponent c2) {
+		return (c1.getY() + c1.getHeight() >= c2.getHeight());
 	}
 		
-	public boolean colidiuPorDentroDirOuEsq(Modelo c1, Modelo c2) {
-		return (c1.getX() <= c2.getX() || c1.getX() + c1.getWidth() >= c2.getWidth());
+	public boolean colidiuPorDentroDireita(Modelo c1, Modelo c2) {
+		return (c1.getX() + c1.getWidth() >= c2.getWidth());
 	}
 	
-	public boolean colidiuPorDentroCimaOuBaixo(Modelo c1, Modelo c2) {
-		return (c1.getY() <= c2.getY() || c1.getY() + c1.getHeight() >= c2.getHeight());
+	public boolean colidiuPorDentroEsquerda(Modelo c1, Modelo c2) {
+		return (c1.getX() <= c2.getX());
+	}
+	
+	public boolean colidiuPorDentroAcima(Modelo c1, Modelo c2) {
+		return (c1.getY() <= c2.getY());
+	}
+	
+	public boolean colidiuPorDentroAbaixo(Modelo c1, Modelo c2) {
+		return (c1.getY() + c1.getHeight() >= c2.getHeight());
 	}
 
 	public boolean colidiuPorFora(Modelo c1, Modelo c2) {
