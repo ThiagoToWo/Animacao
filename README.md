@@ -60,44 +60,61 @@ Este projeto tem as classes mais básicas que podem colaborar entre si para cria
 nas paredes do Canvas fechado e trocadas quando uma bate na outra.
 	
 import java.awt.Color;
+
 import java.awt.Graphics;
 
 import janela.JanelaAnimacao;
+
 import objetos.Forma;
+
 import paineis.Canvas;
+
 import tarefas.Animacao;
+
 import tarefas.Colisao;
 
-public class MainAnimacao {		
+public class MainAnimacao {
+
 	public static void main(String[] args) {
+	
 		// cria as formas	
 		BolaQueColide bolaVermelhaQueColide = new BolaQueColide(10, 200, 20, 20, Color.red);
-		BolaQueColide bolaAzulQueColide = new BolaQueColide(200, 10, 20, 20, Color.blue);		
+		BolaQueColide bolaAzulQueColide = new BolaQueColide(200, 10, 20, 20, Color.blue);
+		
 		// configura os movimentos iniciais
 		bolaVermelhaQueColide.setInc(2, 1);
-		bolaAzulQueColide.setInc(1, 2);			
+		bolaAzulQueColide.setInc(1, 2);	
+		
 		// cria um canvas
-		CanvasFechadoComColisao canvasFechadoComColisao = new CanvasFechadoComColisao();		
+		CanvasFechadoComColisao canvasFechadoComColisao = new CanvasFechadoComColisao();
+		
 		// adiciona s formas no canvas
 		canvasFechadoComColisao.addFormaAnimada(bolaVermelhaQueColide);
-		canvasFechadoComColisao.addFormaAnimada(bolaAzulQueColide);		
+		canvasFechadoComColisao.addFormaAnimada(bolaAzulQueColide);
+		
 		// cria uma animação
-		Animacao a = new Animacao(canvasFechadoComColisao);		
+		Animacao a = new Animacao(canvasFechadoComColisao);
+		
 		// cria uma janela de animação e adiciona a animação
 		new JanelaAnimacao(a);
 	}	
 }
 
-class BolaQueColide extends Forma {	
+class BolaQueColide extends Forma {
+
 	int x, y, w, h;
-	Color c;	
+	Color c;
+	
 	public BolaQueColide(int x, int y, int w, int h, Color c) {
 		super(x, y, w, h, c);
-	}	
+	}
+	
 	Colisao col = new Colisao();	
+	
 	public boolean colidiuCom(Forma f) {
 		return col.colidiuPorFora(this, f);
-	}	
+	}
+	
 	@Override
 	public void pintar(Graphics g) {
 		g.setColor(super.getColor());
@@ -106,16 +123,22 @@ class BolaQueColide extends Forma {
 }
 
 class CanvasFechadoComColisao extends Canvas {	
+
 	Colisao col = new Colisao();	
+	
 	@Override
 	public void atualizarAnimado(int i) {
-		BolaQueColide forma = (BolaQueColide) getFormaAnimada(i);		
+	
+		BolaQueColide forma = (BolaQueColide) getFormaAnimada(i);
+		
 		if (col.colidiuPorDentroDireita(forma, this) || col.colidiuPorDentroEsquerda(forma, this)) {
 			forma.setDx(-1 * forma.getDx());
-		}		
+		}
+		
 		if (col.colidiuPorDentroAcima(forma, this) || col.colidiuPorDentroAbaixo(forma, this)) { 
 			forma.setDy(-1 * forma.getDy());
-		}		
+		}
+		
 		for (int j = 0; j < super.qtdeDeFormasAnimadas(); j++) {
 			if (j == i) continue; // garante que não colidirá uma forma com ela mesma			
 			Forma alvo = getFormaAnimada(j);
@@ -126,6 +149,7 @@ class CanvasFechadoComColisao extends Canvas {
 				alvo.setInc(xTemp, yTemp);
 			}
 		}
+		
 		forma.incAnimacao();
 	}	
 }
@@ -136,18 +160,25 @@ class CanvasFechadoComColisao extends Canvas {
 import java.awt.Color;
 
 import janela.JanelaComando;
+
 import objetos.Forma;
+
 import paineis.Canvas;
+
 import tarefas.Controle;
 
 public class MainComando {
+
 	public static void main(String[] args) {
+	
 		// cria as formas
 		Forma f1 = new Forma(1, 1, 20, 20, Color.black);
-		Forma f2 = new Forma(20, 30, 20, 20, Color.red);		
+		Forma f2 = new Forma(20, 30, 20, 20, Color.red);
+		
 		// configura o incremento das formas
 		f1.setInc(30, 30);
-		f2.setInc(10, 10);		
+		f2.setInc(10, 10);
+		
 		// configura as chaves de controle para as forma.
 		// Exemplo 1: 37 = seta esquerda, 38 seta para cima, 
 		// 39 = seta direita e 40 = seta para baixo.
@@ -155,16 +186,20 @@ public class MainComando {
 		// Exemplo 3: KeyEvent.VK_A = 'a', KeyEvent.VK_W = 'w',
 		// KeyEvent.VK_D = 'd' e KeyEvent.VK_S = 's'.
 		f1.setControles(37, 38, 39, 40);
-		f2.setControles(65, 87, 68, 83);		
+		f2.setControles(65, 87, 68, 83);
+		
 		//cria o canvas
-		Canvas canvas = new Canvas();		
+		Canvas canvas = new Canvas();
+		
 		// adiciona as formas ao canvas
 		canvas.addFormaControlada(f1);
-		canvas.addFormaControlada(f2);		
+		canvas.addFormaControlada(f2);	
+		
 		// cria um controle cujas as formas controladas do canvas serão 
 		// atualizadas, com os incrementos passados em void setInc(int,int),
 		// a cada clique no teclado.
-		Controle controle = new Controle(canvas);		
+		Controle controle = new Controle(canvas);
+		
 		// cria uma janela de controle
 		new JanelaComando(controle);
 	}
