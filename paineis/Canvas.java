@@ -43,12 +43,20 @@ public class Canvas extends JPanel {
 		formaAnimadaList.add(fa);
 	}
 	
+	public void removeFormaAnimada(Forma fa) {
+		formaAnimadaList.remove(fa);
+	}
+	
 	public int qtdeDeFormasAnimadas() {
 		return formaAnimadaList.size();
 	}
 	
 	public void addFormaControlada(Forma fc) {
 		formaControladaList.add(fc);
+	}
+	
+	public void removeFormaControlada(Forma fc) {
+		formaControladaList.remove(fc);
 	}
 	
 	public int qtdeDeFormasControladas() {
