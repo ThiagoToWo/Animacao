@@ -59,7 +59,7 @@ Este projeto tem as classes mais básicas que podem colaborar entre si para cria
 	No exemplo abaixo dois círculos, um vermelho e um azul, movem - se livremente dentro da janela, colidindo com as paredes e entre si. Suas velocidades são refletidas
 nas paredes do Canvas fechado e trocadas quando uma bate na outra.
 	
-<pre> import java.awt.Color;
+<pre>import java.awt.Color;
 
 import java.awt.Graphics;
 
@@ -157,7 +157,7 @@ class CanvasFechadoComColisao extends Canvas {
 4. Exemplo de controle.
 	No exemplo abaixo, dois quadrados, um preto e um vermelho podem ser controlados de forma independente por diferentes setores do teclado.
 	
-import java.awt.Color;
+<pre>import java.awt.Color;
 
 import janela.JanelaComando;
 
@@ -203,3 +203,4 @@ public class MainComando {
 		// cria uma janela de controle
 		new JanelaComando(controle);
 	}
+}</pre>
